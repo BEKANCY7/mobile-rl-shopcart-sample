@@ -1,0 +1,54 @@
+--- app/lib/cart/cart_service.dart	2026-10-29 14:35:37.753395848 +0300
++++ solution/cart_service.dart	2026-10-29 14:34:06.763246550 +0300
+@@ -21,6 +21,7 @@
+   double get discount {
+     final promo = _promo;
+     if (promo == null) return 0;
++    if (subtotal < promo.minSubtotal) return 0;
+     switch (promo.type) {
+       case PromoType.percent:
+         return subtotal * (promo.value / 100.0);
+@@ -30,7 +31,8 @@
+   }
+ 
+   double get shipping {
+-    if (subtotal >= freeShippingThreshold) return 0;
++    final afterDiscount = subtotal - discount;
++    if (afterDiscount >= freeShippingThreshold) return 0;
+     return shippingFee;
+   }
+ 
+@@ -43,12 +45,8 @@
+ 
+     final index = _lines.indexWhere((l) => l.productId == product.id);
+     if (index >= 0) {
+-      _lines[index] = CartLine(
+-        productId: product.id,
+-        name: product.name,
+-        unitPrice: product.unitPrice,
+-        quantity: quantity,
+-      );
++      final existing = _lines[index];
++      _lines[index] = existing.copyWith(quantity: existing.quantity + quantity);
+       return;
+     }
+ 
+@@ -70,6 +68,10 @@
+     if (index < 0) {
+       throw StateError('Product $productId is not in the cart');
+     }
++    if (quantity == 0) {
++      _lines.removeAt(index);
++      return;
++    }
+     _lines[index] = _lines[index].copyWith(quantity: quantity);
+   }
+ 
+@@ -82,6 +84,7 @@
+   bool applyPromoCode(String rawCode) {
+     final promo = PromoCatalog.lookup(rawCode);
+     if (promo == null) return false;
++    if (subtotal < promo.minSubtotal) return false;
+     _promo = promo;
+     return true;
+   }

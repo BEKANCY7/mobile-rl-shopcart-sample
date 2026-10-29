@@ -1,0 +1,37 @@
+{
+  "task_id": "flutter-shopcart-checkout-rules",
+  "title": "Fix ShopCart quantity, promo, and free-shipping rules",
+  "platform": "cross-platform",
+  "framework": "Flutter",
+  "language": "Dart",
+  "task_type": "bugfix",
+  "difficulty": "medium",
+  "estimated_solve_minutes": 25,
+  "tags": [
+    "flutter",
+    "dart",
+    "shopping-cart",
+    "promo-codes",
+    "shipping",
+    "unit-tests",
+    "widget-tests"
+  ],
+  "starter_path": "app/",
+  "solution_path": "solution/",
+  "verifier": {
+    "command": "./verify.sh",
+    "workdir": ".",
+    "success_exit_code": 0
+  },
+  "files_of_interest": [
+    "app/lib/cart/cart_service.dart",
+    "app/test/cart_service_test.dart",
+    "app/test/widget_test.dart"
+  ],
+  "do_not_modify": [
+    "app/test/"
+  ],
+  "rights": "original-work",
+  "author": "Bereket Tegene Niguse",
+  "contact": "berekettegene5@gmail.com"
+}
