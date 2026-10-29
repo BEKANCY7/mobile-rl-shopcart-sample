@@ -12,8 +12,8 @@ All defects live in `app/lib/cart/cart_service.dart`:
 ## Apply
 ```bash
 cp solution/cart_service.dart app/lib/cart/cart_service.dart
-# or
-patch -p0 < solution/fix.patch
+# or, from the repository root:
+patch -p1 < solution/fix.patch
 ```
 
 ## Verify

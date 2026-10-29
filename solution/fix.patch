@@ -1,5 +1,5 @@
---- app/lib/cart/cart_service.dart	2026-10-29 14:35:37.753395848 +0300
-+++ solution/cart_service.dart	2026-10-29 14:34:06.763246550 +0300
+--- a/app/lib/cart/cart_service.dart
++++ b/app/lib/cart/cart_service.dart
 @@ -21,6 +21,7 @@
    double get discount {
      final promo = _promo;
